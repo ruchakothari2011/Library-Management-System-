@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stacks — Library Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== AUTH SCREEN ===================== -->
+<div id="auth-screen" class="auth-screen">
+  <div class="auth-panel-brand">
+    <div class="brand-mark">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 4.5C4 3.67 4.67 3 5.5 3H12V21H5.5C4.67 21 4 20.33 4 19.5V4.5Z" fill="currentColor" opacity="0.85"/><path d="M12 3H18.5C19.33 3 20 3.67 20 4.5V19.5C20 20.33 19.33 21 18.5 21H12V3Z" fill="currentColor" opacity="0.55"/></svg>
+      <span>Stacks</span>
+    </div>
+    <div class="brand-copy">
+      <h1>Run your library like a product, not a spreadsheet.</h1>
+      <p>Track every book, member, loan and fine in one clean workspace — built for librarians who want things to just work.</p>
+    </div>
+    <ul class="brand-points">
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Real-time catalog &amp; availability</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Automatic overdue &amp; fine tracking</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Reports that actually tell you something</li>
+    </ul>
+    <div class="brand-glow"></div>
+  </div>
+
+  <div class="auth-panel-form">
+    <div class="auth-form-wrap">
+
+      <!-- LOGIN -->
+      <form id="login-form" class="auth-form active" autocomplete="off">
+        <h2>Welcome back</h2>
+        <p class="auth-sub">Log in to your Stacks workspace.</p>
+
+        <label class="field">
+          <span>Username or email</span>
+          <input type="text" id="login-username" placeholder="admin" required />
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="login-password" placeholder="••••••••" required />
+        </label>
+
+        <div id="login-error" class="form-error" hidden></div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="login-submit">
+          <span class="btn-label">Log in</span>
+        </button>
+
+        <p class="auth-hint">Demo account — username <b>admin</b>, password <b>admin123</b></p>
+        <p class="auth-switch">New here? <a href="#" data-switch="signup">Create an account</a></p>
+      </form>
+
+      <!-- SIGNUP -->
+      <form id="signup-form" class="auth-form" autocomplete="off">
+        <h2>Create your account</h2>
+        <p class="auth-sub">Set up access to the library dashboard.</p>
+
+        <label class="field">
+          <span>Full name</span>
+          <input type="text" id="signup-fullname" placeholder="Jordan Lee" required />
+        </label>
+        <label class="field">
+          <span>Username</span>
+          <input type="text" id="signup-username" placeholder="jordanlee" required />
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" id="signup-email" placeholder="jordan@example.com" required />
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="signup-password" placeholder="At least 6 characters" required />
+        </label>
+
+        <div id="signup-error" class="form-error" hidden></div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="signup-submit">
+          <span class="btn-label">Create account</span>
+        </button>
+
+        <p class="auth-switch">Already have an account? <a href="#" data-switch="login">Log in</a></p>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== APP SHELL ===================== -->
+<div id="app-shell" class="app-shell" hidden>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="brand-mark small">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 4.5C4 3.67 4.67 3 5.5 3H12V21H5.5C4.67 21 4 20.33 4 19.5V4.5Z" fill="currentColor" opacity="0.85"/><path d="M12 3H18.5C19.33 3 20 3.67 20 4.5V19.5C20 20.33 19.33 21 18.5 21H12V3Z" fill="currentColor" opacity="0.55"/></svg>
+        <span>Stacks</span>
+      </div>
+      <button class="icon-btn sidebar-collapse" id="sidebar-toggle" title="Collapse">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <nav class="nav" id="main-nav">
+      <a href="#/dashboard" class="nav-item" data-route="dashboard">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="9" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="5" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="12" width="7" height="9" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="16" width="7" height="5" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="#/books" class="nav-item" data-route="books">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H12v18H5.5A1.5 1.5 0 0 1 4 19.5v-15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 3h6.5A1.5 1.5 0 0 1 20 4.5v15a1.5 1.5 0 0 1-1.5 1.5H12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>Books</span>
+      </a>
+      <a href="#/members" class="nav-item" data-route="members">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 20c.7-3.6 3.3-5.5 5.5-5.5s4.8 1.9 5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="17" cy="8.5" r="2.4" stroke="currentColor" stroke-width="1.6" opacity=".6"/><path d="M15.5 14.3c1.9.3 3.6 1.7 4.1 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"/></svg>
+        <span>Members</span>
+      </a>
+      <a href="#/issue" class="nav-item" data-route="issue">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11 7l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 5v14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".5"/></svg>
+        <span>Issue &amp; Return</span>
+      </a>
+      <a href="#/overdue" class="nav-item" data-route="overdue">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Overdue &amp; Fines</span>
+      </a>
+      <a href="#/transactions" class="nav-item" data-route="transactions">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Transactions</span>
+      </a>
+      <a href="#/reports" class="nav-item" data-route="reports">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Reports</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a href="#/profile" class="nav-item" data-route="profile">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 20c1-4.2 4-6.5 7.5-6.5s6.5 2.3 7.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Profile &amp; Settings</span>
+      </a>
+      <button class="nav-item nav-item-btn" id="logout-btn">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 21H5.5A1.5 1.5 0 0 1 4 19.5v-15A1.5 1.5 0 0 1 5.5 3H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Log out</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-col">
+    <header class="topbar">
+      <button class="icon-btn mobile-menu-btn" id="mobile-menu-btn">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <h1 class="topbar-title" id="topbar-title">Dashboard</h1>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-user" id="topbar-user">
+        <div class="avatar" id="topbar-avatar">?</div>
+        <div class="topbar-user-text">
+          <div class="topbar-user-name" id="topbar-user-name">—</div>
+          <div class="topbar-user-role">Librarian</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <!-- Pages are rendered here by the router -->
+    </main>
+  </div>
+
+  <div class="sidebar-scrim" id="sidebar-scrim"></div>
+</div>
+
+<!-- ===================== MODAL ROOT ===================== -->
+<div id="modal-root"></div>
+
+<!-- ===================== TOASTS ===================== -->
+<div id="toast-root" class="toast-root"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
